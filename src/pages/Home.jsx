@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react'
-import client from '../lib/pocketbase'
+import TodoList from '../components/TodoList'
 
 
 export default function Home() {
-  useEffect(() => {
-    client.collection("tasks").getFullList().then(res => console.log(res))  
-  }, [])
+  
   return (
-    <div>Home</div>
+    <div><TodoList/></div>
   )
 }
