@@ -9,4 +9,5 @@ Stack
 
 ## To do next
 
-- [ ] fix bug where when I refresh the page it says "internet disconnected"
+- [ ] fix padding issues on delete and edit buttons
+- [ ] add ability to log in
