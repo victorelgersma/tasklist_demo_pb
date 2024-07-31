@@ -30,20 +30,15 @@ export default function TodoList() {
                   <span className="material-symbols-outlined -ml-2">
                     delete
                   </span>
-                  <p>Delete</p>
                 </div>
               </button>
             </div>
             <div className="flex">
-              <button
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md text-base"
-                onClick={() => updateTask(task.id, title, description)}
-              >
-                <div className="flex my-auto">
+              <Link to={`edit/${task.id}`}>
+                <button className="bg-gray-500 rounded-md text-white px-2 hover:bg-gray-600 ml-4">
                   <span className="material-symbols-outlined -ml-2">edit</span>
-                  <p>Edit</p>
-                </div>
-              </button>
+                </button>
+              </Link>
             </div>
           </div>
           <p className="text-xl text-grey 400 my-4">{task.description}</p>

@@ -6,3 +6,7 @@ Stack
 - Tailwind
 - PocketBase
 - Google Material UI Icons
+
+## To do next
+
+- [ ] fix bug where when I refresh the page it says "internet disconnected"

@@ -25,3 +25,10 @@ export async function deleteTask(id) {
   await client.collection("tasks").delete(id);
   window.location.reload();
 }
+
+export async function updateTask(id, title, description) {
+  console.log("updating task");
+  const data = { title: title, description: description };
+  await client.collection("tasks").update(id, data);
+  window.location.reload();
+}
