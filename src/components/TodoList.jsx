@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deleteTask, getTasks } from "../lib/pocketbase";
+import { deleteTask, getTasks, toggleTask } from "../lib/pocketbase";
 import { Link } from "react-router-dom";
 
 export default function TodoList() {
@@ -9,6 +9,12 @@ export default function TodoList() {
   useEffect(() => {
     getTasks().then((res) => setTasks(res));
   }, []);
+
+  const handleToggle = (e, id) => {
+    toggleTask(id, e.target.checked);
+    setCompletedTasks(e.target.checked);
+  };
+
   return (
     <>
       {tasks.map((task) => (
@@ -18,7 +24,8 @@ export default function TodoList() {
               className="h-6 w-6 my-auto mr-2"
               type="checkbox"
               name="completed"
-              checked={task.isDone}
+              defaultChecked={task.completed}
+              onChange={(e) => handleToggle(e, task.id)}
             />
             <h3>{task.title}</h3>
             <div className="flex ml-auto">

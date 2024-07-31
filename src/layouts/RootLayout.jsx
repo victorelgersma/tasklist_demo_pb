@@ -6,7 +6,7 @@ export default function RootLayout() {
     <div>
       <div className="flex my-8">
         <Link to="/" className="text-5xl">
-          PocketTask
+          Taskmaster
         </Link>
         <div className="ml-auto my-auto ">
           <button className="bg-green-500 text-white py-2 px-4 rounded-md">

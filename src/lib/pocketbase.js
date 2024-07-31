@@ -32,3 +32,8 @@ export async function updateTask(id, title, description) {
   await client.collection("tasks").update(id, data);
   window.location.reload();
 }
+
+export async function toggleTask(id, completed) {
+  const data = { completed: completed };
+  await client.collection("tasks").update(id, data);
+}
