@@ -1,26 +1,63 @@
 import React, { useEffect, useState } from "react";
-import client from "../lib/pocketbase";
+import { deleteTask, getTasks } from "../lib/pocketbase";
+import { Link } from "react-router-dom";
 
 export default function TodoList() {
   const [tasks, setTasks] = useState([]);
   // console.log(tasks[0].title)
 
   useEffect(() => {
-    client
-      .collection("tasks")
-      .getFullList()
-      .then((res) => setTasks(res));
+    getTasks().then((res) => setTasks(res));
   }, []);
   return (
-    <div>
-      {tasks.map((task, index) => (
-        <div className="flex">
-            <input className="h-8 w-6 my-auto" type="checkbox" name="completed"/>
-          <h3 key={index} className="test-3xl ml-4">
-            {task.title}
-          </h3>
+    <>
+      {tasks.map((task) => (
+        <div key={task.id}>
+          <div className="flex">
+            <input
+              className="h-6 w-6 my-auto mr-2"
+              type="checkbox"
+              name="completed"
+              checked={task.isDone}
+            />
+            <h3>{task.title}</h3>
+            <div className="flex ml-auto">
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md text-base"
+                onClick={() => deleteTask(task.id)}
+              >
+                <div className="flex my-auto">
+                  <span className="material-symbols-outlined -ml-2">
+                    delete
+                  </span>
+                  <p>Delete</p>
+                </div>
+              </button>
+            </div>
+            <div className="flex">
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md text-base"
+                onClick={() => updateTask(task.id, title, description)}
+              >
+                <div className="flex my-auto">
+                  <span className="material-symbols-outlined -ml-2">edit</span>
+                  <p>Edit</p>
+                </div>
+              </button>
+            </div>
+          </div>
+          <p className="text-xl text-grey 400 my-4">{task.description}</p>
+          <hr></hr>
         </div>
       ))}
-    </div>
+      <Link to="create">
+        <button className="bg-green-500 text-white py-2 px-4 rounded-md text-base">
+          <div className="flex my-auto">
+            <span className="material-symbols-outlined -ml-2">add</span>
+            <p>New task</p>
+          </div>
+        </button>
+      </Link>
+    </>
   );
 }
